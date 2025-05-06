@@ -404,3 +404,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// --- Carousel Produits Vedettes sur l'accueil, effet center mode, sans flou, écart réduit ---
+if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    document.addEventListener('DOMContentLoaded', function() {
+        const carouselInner = document.getElementById('carousel-inner');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+        if (!carouselInner || !prevBtn || !nextBtn) return;
+        const slides = products.map(product => `
+            <div class="carousel-slide flex flex-col items-center justify-center p-6 transition-all duration-700">
+                <img src="${product.image}" alt="${product.name}" class="carousel-img h-56 w-56 md:h-72 md:w-72 object-cover rounded-lg shadow-lg mb-4" loading="lazy">
+                <h3 class="text-xl md:text-2xl font-bold mb-2 text-blue-800">${product.name}</h3>
+                <p class="text-gray-600 mb-2 text-center text-base md:text-lg">${product.description}</p>
+                <div class="font-bold text-blue-800 text-lg md:text-xl mb-2">${product.price} DA</div>
+            </div>
+        `);
+        let current = 0;
+        const showCount = 3;
+        function renderSlides(start) {
+            let html = '';
+            for (let i = 0; i < showCount; i++) {
+                const idx = (start + i) % slides.length;
+                let slideClass = 'opacity-80 scale-95';
+                if (i === 1) slideClass = 'opacity-100 scale-105 z-10'; // slide centrale
+                html += `<div class="flex-1 mx-3 carousel-anim ${slideClass}">${slides[idx]}</div>`;
+            }
+            carouselInner.innerHTML = `<div class="flex flex-row justify-center items-stretch transition-transform duration-700">${html}</div>`;
+        }
+        function slideTo(direction) {
+            carouselInner.firstChild && (carouselInner.firstChild.style.transition = 'transform 0.7s cubic-bezier(0.77,0,0.18,1)');
+            carouselInner.firstChild && (carouselInner.firstChild.style.transform = `translateX(${direction === 'left' ? '-100%' : '100%'})`);
+            setTimeout(() => {
+                current = (current + (direction === 'left' ? 1 : -1) + slides.length) % slides.length;
+                renderSlides(current);
+            }, 400);
+        }
+        renderSlides(current);
+        prevBtn.addEventListener('click', () => slideTo('right'));
+        nextBtn.addEventListener('click', () => slideTo('left'));
+        setInterval(() => {
+            slideTo('left');
+        }, 4000);
+    });
+}
