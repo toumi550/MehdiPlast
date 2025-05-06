@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Produits - MehdiPlast</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Logo MehdiPlast, cercle bleu avec une caméra stylisée" class="h-10 w-10 object-cover rounded-full mr-3" loading="lazy">
+                <h1 class="text-xl font-bold text-blue-800">MehdiPlast</h1>
+            </div>
+            <nav class="space-x-4 hidden md:block">
+                <a href="index.html" class="text-gray-700 hover:text-blue-800">Accueil</a>
+                <a href="produits.html" class="text-blue-800 font-bold">Produits</a>
+                <a href="a-propos.html" class="text-gray-700 hover:text-blue-800">À propos</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-800">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="cart-toggle" class="relative text-gray-700 hover:text-blue-800">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button class="md:hidden text-gray-700" id="mobile-menu-toggle">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-800">Accueil</a>
+            <a href="produits.html" class="block py-2 text-blue-800 font-bold">Produits</a>
+            <a href="a-propos.html" class="block py-2 text-gray-700 hover:text-blue-800">À propos</a>
+            <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-800">Contact</a>
+        </div>
+    </header>
+
+    <!-- Shopping Cart Sidebar (synchronisé avec index.html) -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Votre Commande</h3>
+                <button id="cart-close" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <button id="clear-cart-btn" class="mb-4 w-full bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 px-4 rounded transition duration-300">Vider le panier</button>
+            <div id="cart-items" class="mb-6">
+                <!-- Cart items will be dynamically inserted here -->
+                <div class="text-center py-8 text-gray-500" id="empty-cart-message">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p>Votre panier est vide</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Sous-total:</span>
+                    <span id="cart-subtotal" class="font-bold">0,00 DZD</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Livraison:</span>
+                    <span class="font-bold">Calculé à la caisse</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cart-total">0,00 DZD</span>
+                </div>
+            </div>
+            <button id="checkout-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 mb-4 disabled:opacity-50" disabled>
+                Passer à la Caisse
+            </button>
+            <div class="text-center text-sm text-gray-500">
+                <p>Nous acceptons les paiements via:</p>
+                <div class="flex justify-center mt-2">
+                    <img src="https://via.placeholder.com/80x40?text=BaridiMob" alt="BaridiMob" class="h-10 mr-2">
+                    <img src="https://via.placeholder.com/80x40?text=Carte+Bancaire" alt="Carte Bancaire" class="h-10">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <main>
+        <section id="products" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Notre Catalogue de Produits</h2>
+                <!-- Barre de recherche -->
+                <div class="flex justify-center mb-8 gap-2 flex-wrap">
+                    <input id="search-input" type="text" placeholder="Rechercher un produit..." class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="flex flex-wrap justify-center mb-8 gap-2">
+                    <button class="category-btn px-4 py-2 rounded-full bg-blue-600 text-white" data-category="all">Tous les Produits</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="mounts">Supports</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="sealing">Composants d'Étanchéité</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="custom">Pièces Sur Mesure</button>
+                </div>
+                <div id="products-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Les produits seront générés par main.js -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MehdiPlast</h3>
+                    <p class="text-gray-400">Fabricant d’accessoires et composants plastiques sur mesure pour l’industrie.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Accueil</a></li>
+                        <li><a href="produits.html" class="text-gray-400 hover:text-white">Produits</a></li>
+                        <li><a href="a-propos.html" class="text-gray-400 hover:text-white">À propos</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Sidi Bel Abbès</li>
+                        <li><i class="fas fa-envelope mr-2"></i> contact@mehdiplast.com</li>
+                        <li><i class="fas fa-phone-alt mr-2"></i> +213 48 74 12 34</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Suivez-nous</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-500">&copy; 2025 MehdiPlast. Tous droits réservés.</div>
+        </div>
+    </footer>
+
+    <!-- Modal Produit (optionnel, pour détails produits) -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="modal-product-name" class="text-2xl font-bold"></h3>
+                    <button id="close-modal" class="text-gray-700 hover:text-blue-800 text-2xl">&times;</button>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <img id="modal-product-image" src="" alt="" class="w-full rounded-lg mb-4" loading="lazy">
+                        <div class="grid grid-cols-3 gap-2">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1489&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <p id="modal-product-description" class="mb-4"></p>
+                        <div class="flex items-center mb-4">
+                            <span id="modal-product-price" class="text-2xl font-bold text-blue-800"></span>
+                        </div>
+                        <button id="add-to-cart-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Ajouter au Panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="main.js"></script>
+</body>
+</html>

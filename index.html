@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MehdiPlast - Fabricant d'Accessoires Plastiques Sur Mesure</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Logo MehdiPlast, cercle bleu avec une caméra stylisée" class="h-10 w-10 object-cover rounded-full mr-3" loading="lazy">
+                <h1 class="text-xl font-bold text-blue-800">MehdiPlast</h1>
+            </div>
+            
+            <nav class="space-x-4 hidden md:block">
+                <a href="index.html" class="text-blue-800 font-bold">Accueil</a>
+                <a href="produits.html" class="text-gray-700 hover:text-blue-800">Produits</a>
+                <a href="a-propos.html" class="text-gray-700 hover:text-blue-800">À propos</a>
+                <a href="contact.html" class="text-gray-700 hover:text-blue-800">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="cart-toggle" class="relative text-gray-700 hover:text-blue-800">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button class="md:hidden text-gray-700" id="mobile-menu-toggle">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="index.html" class="block py-2 text-blue-800 font-bold">Accueil</a>
+            <a href="produits.html" class="block py-2 text-gray-700 hover:text-blue-800">Produits</a>
+            <a href="a-propos.html" class="block py-2 text-gray-700 hover:text-blue-800">À propos</a>
+            <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-800">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Solutions Plastiques de Précision</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Accessoires et composants plastiques sur mesure fabriqués selon vos spécifications exactes</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="produits.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Voir nos Produits</a>
+                    <a href="contact.html" class="bg-white hover:bg-gray-100 text-blue-800 font-bold py-3 px-6 rounded-lg transition duration-300">Demander un Devis</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 rounded-lg bg-gray-50 hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-cogs text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Fabrication Sur Mesure</h3>
+                        <p class="text-gray-600">Composants plastiques personnalisés conçus pour répondre à vos besoins spécifiques et aux normes industrielles.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-lg bg-gray-50 hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-award text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Qualité Premium</h3>
+                        <p class="text-gray-600">Matériaux de haute qualité et ingénierie de précision pour des accessoires plastiques durables et fiables.</p>
+                    </div>
+                    <div class="text-center p-6 rounded-lg bg-gray-50 hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 mb-4">
+                            <i class="fas fa-truck text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Livraison Rapide</h3>
+                        <p class="text-gray-600">Production et logistique efficaces pour garantir une livraison ponctuelle de vos commandes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Notre Catalogue de Produits</h2>
+                
+                <div class="flex flex-wrap justify-center mb-8 gap-2">
+                    <button class="category-btn px-4 py-2 rounded-full bg-blue-600 text-white" data-category="all">Tous les Produits</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="mounts">Supports</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="sealing">Composants d'Étanchéité</button>
+                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="custom">Pièces Sur Mesure</button>
+                </div>
+                
+                <div id="products-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <!-- Les produits seront générés par main.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-16 gradient-bg text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Témoignages de Nos Clients</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="mb-4">"Les supports de caméra que nous avons commandés chez MehdiPlast ont considérablement amélioré la durabilité de nos produits. Leur attention aux détails est exceptionnelle."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Portrait client Ahmed K." class="rounded-full w-10 h-10 object-cover mr-3" loading="lazy">
+                            <div>
+                                <h4 class="font-bold">Ahmed K.</h4>
+                                <p class="text-sm opacity-80">Société de Systèmes de Sécurité</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="mb-4">"Nous travaillons avec MehdiPlast depuis 3 ans maintenant. Leurs composants d'étanchéité sur mesure ne nous ont jamais déçus, et leurs livraisons sont toujours ponctuelles."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Portrait client Sarah M." class="rounded-full w-10 h-10 object-cover mr-3" loading="lazy">
+                            <div>
+                                <h4 class="font-bold">Sarah M.</h4>
+                                <p class="text-sm opacity-80">Équipements Industriels Ltd.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-filter backdrop-blur-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <p class="mb-4">"Leur capacité à créer des pièces plastiques complexes à partir de nos dessins CAO est impressionnante. Nous avons réduit notre temps d'assemblage de 20% grâce à leurs composants de précision."</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1497&q=80" alt="Portrait client Karim B." class="rounded-full w-10 h-10 object-cover mr-3" loading="lazy">
+                            <div>
+                                <h4 class="font-bold">Karim B.</h4>
+                                <p class="text-sm opacity-80">Fabricant d'Électronique</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section FAQ -->
+        <section id="faq" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-10 text-blue-800">Foire Aux Questions (FAQ)</h2>
+                <div class="max-w-2xl mx-auto">
+                    <div class="faq-item border-b">
+                        <button class="faq-question w-full text-left py-4 font-semibold text-lg flex justify-between items-center focus:outline-none">
+                            Quels sont les délais de livraison ?
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer hidden pb-4 text-gray-700">Les délais de livraison varient de 2 à 7 jours selon votre localisation et le type de produit commandé.</div>
+                    </div>
+                    <div class="faq-item border-b">
+                        <button class="faq-question w-full text-left py-4 font-semibold text-lg flex justify-between items-center focus:outline-none">
+                            Puis-je commander une pièce sur mesure ?
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer hidden pb-4 text-gray-700">Oui, nous réalisons des pièces sur mesure à partir de vos plans ou besoins spécifiques. Contactez-nous via le formulaire ou par téléphone.</div>
+                    </div>
+                    <div class="faq-item border-b">
+                        <button class="faq-question w-full text-left py-4 font-semibold text-lg flex justify-between items-center focus:outline-none">
+                            Quels sont les modes de paiement acceptés ?
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer hidden pb-4 text-gray-700">Nous acceptons le paiement à la livraison, BaridiMob, et carte bancaire.</div>
+                    </div>
+                    <div class="faq-item border-b">
+                        <button class="faq-question w-full text-left py-4 font-semibold text-lg flex justify-between items-center focus:outline-none">
+                            Comment suivre ma commande ?
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer hidden pb-4 text-gray-700">Après validation, vous recevez un numéro de suivi par email ou SMS. Utilisez-le pour suivre votre commande.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+        // Accordéon FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.faq-question').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const answer = btn.parentElement.querySelector('.faq-answer');
+                    const toggle = btn.querySelector('.faq-toggle');
+                    if (answer.classList.contains('hidden')) {
+                        // Fermer les autres
+                        document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                        document.querySelectorAll('.faq-toggle').forEach(t => t.textContent = '+');
+                        answer.classList.remove('hidden');
+                        toggle.textContent = '-';
+                    } else {
+                        answer.classList.add('hidden');
+                        toggle.textContent = '+';
+                    }
+                });
+            });
+        });
+        </script>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Votre Commande</h3>
+                <button id="cart-close" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <button id="clear-cart-btn" class="mb-4 w-full bg-red-100 hover:bg-red-200 text-red-700 font-bold py-2 px-4 rounded transition duration-300">Vider le panier</button>
+            <div id="cart-items" class="mb-6">
+                <!-- Cart items will be dynamically inserted here -->
+                <div class="text-center py-8 text-gray-500" id="empty-cart-message">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p>Votre panier est vide</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Sous-total:</span>
+                    <span id="cart-subtotal" class="font-bold">0,00 DZD</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="font-medium">Livraison:</span>
+                    <span class="font-bold">Calculé à la caisse</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="cart-total">0,00 DZD</span>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 mb-4 disabled:opacity-50" disabled>
+                Passer à la Caisse
+            </button>
+            
+            <div class="text-center text-sm text-gray-500">
+                <p>Nous acceptons les paiements via:</p>
+                <div class="flex justify-center mt-2">
+                    <img src="https://via.placeholder.com/80x40?text=BaridiMob" alt="BaridiMob" class="h-10 mr-2">
+                    <img src="https://via.placeholder.com/80x40?text=Carte+Bancaire" alt="Carte Bancaire" class="h-10">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MehdiPlast</h3>
+                    <p class="mb-4">Fabricant de composants plastiques de précision et d'accessoires sur mesure pour applications industrielles.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Liens Rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Accueil</a></li>
+                        <li><a href="produits.html" class="text-gray-400 hover:text-white">Produits</a></li>
+                        <li><a href="a-propos.html" class="text-gray-400 hover:text-white">À propos</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Conditions d'Utilisation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Produits</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Supports pour Caméras</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Composants d'Étanchéité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pièces Plastiques Sur Mesure</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Composants Industriels</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services de Prototypage</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Newsletter</h4>
+                    <p class="mb-4 text-gray-400">Abonnez-vous à notre newsletter pour les dernières actualités et offres.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 MehdiPlast. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="modal-product-name" class="text-2xl font-bold"></h3>
+                    <button id="modal-close" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/2">
+                        <img id="modal-product-image" src="" alt="" class="w-full rounded-lg mb-4" loading="lazy">
+                        <div class="grid grid-cols-3 gap-2">
+                            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1520390138845-fd2d229dd553?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1489&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Produit alternatif" class="rounded cursor-pointer hover:opacity-75" loading="lazy">
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <p id="modal-product-description" class="text-gray-700 mb-4"></p>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">Spécifications:</h4>
+                            <ul id="modal-product-specs" class="list-disc pl-5 space-y-1 text-gray-700">
+                                <!-- Specs will be added here -->
+                            </ul>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <span class="font-bold text-lg mr-4" id="modal-product-price"></span>
+                            <div class="flex items-center border border-gray-300 rounded">
+                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100" id="modal-decrease-qty">-</button>
+                                <span class="px-3 py-1 border-x border-gray-300" id="modal-product-qty">1</span>
+                                <button class="px-3 py-1 text-gray-600 hover:bg-gray-100" id="modal-increase-qty">+</button>
+                            </div>
+                        </div>
+                        
+                        <button id="modal-add-to-cart" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 mb-4">
+                            Ajouter au Panier
+                        </button>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-truck text-blue-600 mr-2"></i>
+                                <span>Livraison gratuite pour les commandes supérieures à 50 000 DZD</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-undo text-blue-600 mr-2"></i>
+                                <span>Politique de retour de 30 jours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

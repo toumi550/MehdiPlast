@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation de Commande | MehdiPlast</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header (même que les autres pages) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Logo MehdiPlast" class="h-10 w-10 object-cover rounded-full mr-3">
+            <h1 class="text-xl font-bold text-blue-800">MehdiPlast</h1>
+            <nav>
+                <a href="index.html" class="mx-2 hover:text-blue-700">Accueil</a>
+                <a href="produits.html" class="mx-2 hover:text-blue-700">Produits</a>
+                <a href="a-propos.html" class="mx-2 hover:text-blue-700">À propos</a>
+                <a href="contact.html" class="mx-2 hover:text-blue-700">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+        <!-- Formulaire de validation -->
+        <section class="bg-white rounded-lg shadow-md p-8 flex-1">
+            <h2 class="text-2xl font-bold mb-6 text-blue-800">Informations de Livraison</h2>
+            <form id="checkout-form" class="space-y-4">
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block font-medium mb-1">Nom <span class="text-red-500">*</span></label>
+                        <input type="text" name="nom" required class="w-full border border-gray-300 rounded px-3 py-2">
+                    </div>
+                    <div class="flex-1">
+                        <label class="block font-medium mb-1">Prénom <span class="text-red-500">*</span></label>
+                        <input type="text" name="prenom" required class="w-full border border-gray-300 rounded px-3 py-2">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Téléphone <span class="text-red-500">*</span></label>
+                    <input type="tel" name="telephone" required pattern="^\+?213[5-7][0-9]{8}$" placeholder="ex: +213661234567" class="w-full border border-gray-300 rounded px-3 py-2">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Email</label>
+                    <input type="email" name="email" class="w-full border border-gray-300 rounded px-3 py-2">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Adresse <span class="text-red-500">*</span></label>
+                    <input type="text" name="adresse" required class="w-full border border-gray-300 rounded px-3 py-2">
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="block font-medium mb-1">Wilaya <span class="text-red-500">*</span></label>
+                        <select name="wilaya" required class="w-full border border-gray-300 rounded px-3 py-2">
+                            <option value="">Sélectionnez une wilaya</option>
+                            <option value="Alger">Alger</option>
+                            <option value="Oran">Oran</option>
+                            <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
+                            <option value="Constantine">Constantine</option>
+                            <option value="Annaba">Annaba</option>
+                            <option value="Blida">Blida</option>
+                            <option value="Tlemcen">Tlemcen</option>
+                            <!-- ... autres wilayas ... -->
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block font-medium mb-1">Commune</label>
+                        <input type="text" name="commune" class="w-full border border-gray-300 rounded px-3 py-2">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Mode de livraison <span class="text-red-500">*</span></label>
+                    <select name="livraison" required class="w-full border border-gray-300 rounded px-3 py-2">
+                        <option value="">Choisissez un mode</option>
+                        <option value="domicile">Livraison à domicile</option>
+                        <option value="bureau">Point de retrait</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Commentaires</label>
+                    <textarea name="commentaires" rows="2" class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Valider la commande</button>
+            </form>
+            <div id="confirmation" class="hidden mt-8 p-6 rounded-lg bg-green-100 text-green-900 text-lg font-semibold"></div>
+        </section>
+
+        <!-- Récapitulatif du panier -->
+        <aside class="bg-white rounded-lg shadow-md p-8 w-full md:w-96">
+            <h3 class="text-xl font-bold mb-4 text-blue-800">Votre Panier</h3>
+            <ul id="panier-recap" class="mb-4 text-gray-700">
+                <!-- Les produits du panier seront injectés ici -->
+            </ul>
+            <div class="font-bold text-lg">Total : <span id="panier-total">0 DA</span></div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-12">
+        <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="font-bold mb-4">MehdiPlast</h4>
+                <p>Fabricant d’accessoires et composants plastiques sur mesure pour l’industrie.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Liens Rapides</h4>
+                <ul class="space-y-2">
+                    <li><a href="index.html" class="hover:underline">Accueil</a></li>
+                    <li><a href="produits.html" class="hover:underline">Produits</a></li>
+                    <li><a href="a-propos.html" class="hover:underline">À propos</a></li>
+                    <li><a href="contact.html" class="hover:underline">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4">Contact</h4>
+                <ul class="space-y-2">
+                    <li><i class="fas fa-map-marker-alt mr-2"></i> Sidi Bel Abbès</li>
+                    <li><i class="fas fa-envelope mr-2"></i> contact@mehdiplast.com</li>
+                    <li><i class="fas fa-phone-alt mr-2"></i> +213 48 74 12 34</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-sm text-gray-400 py-4"> 2025 MehdiPlast. Tous droits réservés.</div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+    // Récupère le panier depuis localStorage (même logique que main.js)
+    function loadCart() {
+        const data = localStorage.getItem('mehdiPlastCart');
+        return data ? JSON.parse(data) : [];
+    }
+    // Affiche le panier dans le récapitulatif
+    function renderRecap() {
+        const cart = loadCart();
+        const recap = document.getElementById('panier-recap');
+        const totalSpan = document.getElementById('panier-total');
+        if (!recap || !totalSpan) return;
+        if (cart.length === 0) {
+            recap.innerHTML = '<li class="text-gray-400">Votre panier est vide.</li>';
+            totalSpan.textContent = '0 DA';
+            return;
+        }
+        let total = 0;
+        recap.innerHTML = cart.map(item => {
+            total += item.price * item.quantity;
+            return `<li class="flex justify-between mb-2"><span>${item.name} x ${item.quantity}</span><span>${item.price * item.quantity} DA</span></li>`;
+        }).join('');
+        totalSpan.textContent = total + ' DA';
+    }
+    renderRecap();
+
+    // Validation améliorée du formulaire
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = e.target;
+        let valid = true;
+        let messages = [];
+        // Vérification manuelle des champs obligatoires
+        if (!form.nom.value.trim()) {
+            valid = false;
+            messages.push('Le nom est obligatoire.');
+        }
+        if (!form.prenom.value.trim()) {
+            valid = false;
+            messages.push('Le prénom est obligatoire.');
+        }
+        if (!/^\+?213[5-7][0-9]{8}$/.test(form.telephone.value.trim())) {
+            valid = false;
+            messages.push('Le téléphone doit être au format +213XXXXXXXXX.');
+        }
+        if (!form.adresse.value.trim()) {
+            valid = false;
+            messages.push('L\'adresse est obligatoire.');
+        }
+        if (!form.wilaya.value) {
+            valid = false;
+            messages.push('La wilaya est obligatoire.');
+        }
+        if (!form.livraison.value) {
+            valid = false;
+            messages.push('Le mode de livraison est obligatoire.');
+        }
+        // Affichage des erreurs ou confirmation
+        const confirmation = document.getElementById('confirmation');
+        if (!valid) {
+            confirmation.innerHTML = messages.map(m => `<div class='mb-2 text-red-600'>${m}</div>`).join('');
+            confirmation.classList.remove('hidden','bg-green-100','text-green-900');
+            confirmation.classList.add('bg-red-100','text-red-900');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        // Confirmation
+        const numCommande = 'DZ' + Math.floor(100000 + Math.random() * 900000);
+        confirmation.innerHTML = `Merci pour votre commande !<br>Votre numéro de suivi est <span class='font-bold'>${numCommande}</span>.<br><button onclick="window.location.href='index.html'" class='mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition'>Retour à l'accueil</button>`;
+        confirmation.classList.remove('hidden','bg-red-100','text-red-900');
+        confirmation.classList.add('bg-green-100','text-green-900');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Optionnel : vider le panier après validation
+        localStorage.removeItem('mehdiPlastCart');
+        renderRecap();
+        form.reset();
+    });
+    </script>
+</body>
+</html>
