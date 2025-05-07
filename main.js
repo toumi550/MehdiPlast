@@ -36,6 +36,22 @@ const products = [
         image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=800&q=80",
         description: "Support antivol en aluminium, conçu pour milieux industriels exigeants."
     },
+    {
+        id: 13,
+        name: "Support tube universel",
+        category: "mounts",
+        price: 2950,
+        image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+        description: "Support tube pour installation sur poteaux ou rails."
+    },
+    {
+        id: 14,
+        name: "Mini-support dôme",
+        category: "mounts",
+        price: 2200,
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+        description: "Support discret pour mini-caméras dôme, montage rapide."
+    },
     // --- Joints d'étanchéité ---
     {
         id: 5,
@@ -69,6 +85,22 @@ const products = [
         image: "https://images.unsplash.com/photo-1519121788667-01c1b2edc8b9?auto=format&fit=crop&w=800&q=80",
         description: "Joint spiralé haute pression, pour brides et tuyauteries industrielles."
     },
+    {
+        id: 15,
+        name: "Joint plat fibre rouge",
+        category: "sealing",
+        price: 320,
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        description: "Joint plat en fibre, pour raccords vapeur basse pression."
+    },
+    {
+        id: 16,
+        name: "Joint mousse EPDM noir",
+        category: "sealing",
+        price: 400,
+        image: "https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80",
+        description: "Joint mousse noir, étanchéité portes et fenêtres."
+    },
     // --- Pièces sur mesure ---
     {
         id: 9,
@@ -101,6 +133,22 @@ const products = [
         price: 800,
         image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=800&q=80",
         description: "Rondelle en plastique technique, idéale pour isolations et montages spéciaux."
+    },
+    {
+        id: 17,
+        name: "Cache-vis transparent",
+        category: "custom",
+        price: 600,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+        description: "Cache-vis en polycarbonate, transparent et discret."
+    },
+    {
+        id: 18,
+        name: "Plaque technique usinée",
+        category: "custom",
+        price: 2100,
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
+        description: "Plaque plastique technique, usinage sur mesure."
     }
 ];
 
@@ -254,6 +302,9 @@ function showCategoryCarousel(catKey) {
         if (window.innerWidth < 1024) return 2;
         return 3;
     }
+    let autoSlideInterval = null;
+    let carouselHovered = false;
+    let modalOpen = false;
     function renderCarousel() {
         // Animation slide-out si déjà un slide
         const oldSlide = container.querySelector('.carousel-slide');
@@ -286,25 +337,38 @@ function showCategoryCarousel(catKey) {
             slide.classList.remove('translate-x-[100%]', 'opacity-0');
             slide.classList.add('translate-x-0', 'opacity-100');
         }, 10);
-        // Flèches navigation
+        // Flèches navigation (toujours sous le carrousel)
         let nav = container.querySelector('.carousel-nav');
-        if (!nav && catProducts.length > visibleCount) {
-            nav = document.createElement('div');
-            nav.className = 'carousel-nav flex justify-center gap-8 mt-4';
-            nav.innerHTML = `
-                <button id="carousel-prev" class="bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition"><i class="fas fa-chevron-left"></i></button>
-                <button id="carousel-next" class="bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition"><i class="fas fa-chevron-right"></i></button>
-            `;
-            container.appendChild(nav);
-            nav.querySelector('#carousel-prev').addEventListener('click', () => {
-                current = (current - visibleCount + catProducts.length) % catProducts.length;
-                renderCarousel();
-            });
-            nav.querySelector('#carousel-next').addEventListener('click', () => {
-                current = (current + visibleCount) % catProducts.length;
-                renderCarousel();
-            });
-        }
+        if (nav) nav.remove(); // Supprime nav existant pour l’ajouter toujours après le slide
+        // Conteneur navigation + bouton, vertical et centré
+        let navGroup = container.querySelector('.carousel-nav-group');
+        if (navGroup) navGroup.remove();
+        navGroup = document.createElement('div');
+        navGroup.className = 'carousel-nav-group flex flex-col items-center justify-center gap-4 mt-6 mb-4';
+        // Flèches
+        nav = document.createElement('div');
+        nav.className = 'carousel-nav flex justify-center gap-8';
+        nav.innerHTML = `
+            <button id="carousel-prev" class="bg-white/80 backdrop-blur-md hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition duration-300 scale-110"><i class="fas fa-chevron-left"></i></button>
+            <button id="carousel-next" class="bg-white/80 backdrop-blur-md hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition duration-300 scale-110"><i class="fas fa-chevron-right"></i></button>
+        `;
+        navGroup.appendChild(nav);
+        nav.querySelector('#carousel-prev').addEventListener('click', () => {
+            current = (current - visibleCount + catProducts.length) % catProducts.length;
+            renderCarousel();
+        });
+        nav.querySelector('#carousel-next').addEventListener('click', () => {
+            current = (current + visibleCount) % catProducts.length;
+            renderCarousel();
+        });
+        // Bouton centré sous les flèches
+        let allBtn = document.createElement('button');
+        allBtn.className = 'see-all-btn mt-3 px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-bold shadow-xl text-lg hover:scale-105 hover:from-blue-700 hover:to-blue-500 transition-all duration-300 backdrop-blur-md';
+        allBtn.innerHTML = '<i class="fas fa-th-large mr-2"></i>Voir tous les produits';
+        allBtn.onclick = () => openAllProductsModal(catProducts);
+        navGroup.appendChild(allBtn);
+        container.appendChild(navGroup);
+
         // Ajout au panier
         slide.querySelectorAll('.add-to-cart-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -315,6 +379,69 @@ function showCategoryCarousel(catKey) {
     }
     renderCarousel();
     window.addEventListener('resize', renderCarousel);
+
+    // --- Auto-slide moderne ---
+    function startAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            if (!carouselHovered && !modalOpen) {
+                current = (current + getVisibleCount()) % catProducts.length;
+                renderCarousel();
+            }
+        }, 4000);
+    }
+    function stopAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
+    }
+    // Pause auto-slide si survol
+    container.addEventListener('mouseenter', () => { carouselHovered = true; stopAutoSlide(); });
+    container.addEventListener('mouseleave', () => { carouselHovered = false; startAutoSlide(); });
+    // Pause auto-slide si modale ouverte
+    const observer = new MutationObserver(() => {
+        modalOpen = !!document.getElementById('all-products-modal');
+        if (modalOpen) stopAutoSlide(); else startAutoSlide();
+    });
+    observer.observe(document.body, { childList: true });
+    startAutoSlide();
+}
+
+// Modale "Voir tous les produits" (2025 style)
+function openAllProductsModal(catProducts) {
+    // Supprime modale existante si besoin
+    let modal = document.getElementById('all-products-modal');
+    if (modal) modal.remove();
+    modal = document.createElement('div');
+    modal.id = 'all-products-modal';
+    modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn';
+    modal.innerHTML = `
+        <div class="relative w-full max-w-5xl max-h-[90vh] bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 overflow-y-auto flex flex-col animate-slideUp">
+            <button id="close-all-products" class="absolute top-4 right-4 text-blue-800 bg-white/80 rounded-full p-2 shadow hover:bg-blue-600 hover:text-white transition duration-300"><i class='fas fa-times text-2xl'></i></button>
+            <h2 class="text-2xl md:text-4xl font-extrabold text-blue-900 text-center mb-8 tracking-wide drop-shadow-lg">Tous les produits de la catégorie</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                ${catProducts.map(prod => `
+                <div class="bg-white/90 rounded-2xl shadow-lg p-6 flex flex-col items-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
+                    <img src="${prod.image}" alt="${prod.name}" class="h-32 w-32 object-cover rounded-lg mb-4 shadow">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2 text-center">${prod.name}</h3>
+                    <p class="text-gray-600 mb-2 text-center text-sm">${prod.description}</p>
+                    <div class="font-bold text-blue-800 text-base mb-2">${prod.price} DA</div>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition duration-300 add-to-cart-btn" data-id="${prod.id}">Ajouter au panier</button>
+                </div>`).join('')}
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    document.getElementById('close-all-products').onclick = () => modal.remove();
+    // Ajout au panier dans la modale
+    modal.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = parseInt(e.target.getAttribute('data-id'));
+            addToCart(id);
+        });
+    });
+    // Fermer modale sur clic fond
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.remove();
+    });
 }
 
 // Initialisation page produits
