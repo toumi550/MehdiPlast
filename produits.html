@@ -94,14 +94,17 @@
                 <div class="flex justify-center mb-8 gap-2 flex-wrap">
                     <input id="search-input" type="text" placeholder="Rechercher un produit..." class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-                <div class="flex flex-wrap justify-center mb-8 gap-2">
-                    <button class="category-btn px-4 py-2 rounded-full bg-blue-600 text-white" data-category="all">Tous les Produits</button>
-                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="mounts">Supports</button>
-                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="sealing">Composants d'Étanchéité</button>
-                    <button class="category-btn px-4 py-2 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white" data-category="custom">Pièces Sur Mesure</button>
+                <!-- Slogan catégories -->
+                <div class="w-full flex justify-center items-center mb-8">
+                    <h2 class="text-xl md:text-3xl font-extrabold text-blue-900 text-center tracking-wide drop-shadow-lg">Nos catégories</h2>
                 </div>
-                <div id="products-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    <!-- Les produits seront générés par main.js -->
+                <!-- Grille catégories -->
+                <div id="categories-list" class="flex flex-col md:flex-row justify-center gap-8 mb-12">
+                    <!-- Les cartes catégories seront générées par JS -->
+                </div>
+                <!-- Conteneur carrousel complet d'une catégorie (affiché après clic) -->
+                <div id="category-carousel-container" class="hidden">
+                    <!-- Carrousel JS -->
                 </div>
             </div>
         </section>

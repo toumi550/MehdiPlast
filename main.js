@@ -3,37 +3,104 @@
 
 // Sample product data
 const products = [
+    // --- Supports pour Caméra ---
     {
         id: 1,
-        name: "Support pour Caméra",
+        name: "Support mural en acier",
         category: "mounts",
-        price: 3900,
-        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80",
-        description: "Support robuste et adaptable pour caméras industrielles."
+        price: 4200,
+        image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=800&q=80",
+        description: "Support mural robuste en acier galvanisé pour caméras de surveillance." 
     },
     {
         id: 2,
-        name: "Joint d'Étanchéité",
-        category: "sealing",
-        price: 850,
-        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        description: "Composant d'étanchéité haute performance pour applications industrielles."
+        name: "Fixation orientable 360°",
+        category: "mounts",
+        price: 3700,
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+        description: "Support orientable pour installation flexible de caméras, intérieur/extérieur."
     },
     {
         id: 3,
-        name: "Pièce Sur Mesure",
-        category: "custom",
-        price: 7200,
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        description: "Fabrication de pièces plastiques sur mesure selon vos besoins."
+        name: "Support plafond discret",
+        category: "mounts",
+        price: 3350,
+        image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
+        description: "Support plafond compact, idéal pour caméras dôme ou mini-caméras."
     },
     {
         id: 4,
-        name: "Support Universel",
+        name: "Support antivol renforcé",
         category: "mounts",
-        price: 3100,
-        image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        description: "Support universel pour divers équipements industriels."
+        price: 5100,
+        image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=800&q=80",
+        description: "Support antivol en aluminium, conçu pour milieux industriels exigeants."
+    },
+    // --- Joints d'étanchéité ---
+    {
+        id: 5,
+        name: "Joint torique EPDM",
+        category: "sealing",
+        price: 450,
+        image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+        description: "Joint torique en EPDM pour étanchéité de raccords hydrauliques et pneumatiques."
+    },
+    {
+        id: 6,
+        name: "Joint plat silicone",
+        category: "sealing",
+        price: 690,
+        image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=800&q=80",
+        description: "Joint plat en silicone alimentaire, résistant aux hautes températures."
+    },
+    {
+        id: 7,
+        name: "Joint mousse autocollant",
+        category: "sealing",
+        price: 380,
+        image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+        description: "Joint mousse à coller, idéal pour portes, coffrets, armoires électriques."
+    },
+    {
+        id: 8,
+        name: "Joint spiralé inox/PTFE",
+        category: "sealing",
+        price: 1200,
+        image: "https://images.unsplash.com/photo-1519121788667-01c1b2edc8b9?auto=format&fit=crop&w=800&q=80",
+        description: "Joint spiralé haute pression, pour brides et tuyauteries industrielles."
+    },
+    // --- Pièces sur mesure ---
+    {
+        id: 9,
+        name: "Bague d'usure sur mesure",
+        category: "custom",
+        price: 2750,
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        description: "Bague d'usure en plastique technique, usinée à la demande."
+    },
+    {
+        id: 10,
+        name: "Entretoise polyamide",
+        category: "custom",
+        price: 1550,
+        image: "https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80",
+        description: "Entretoise en polyamide, fabrication sur plan pour applications mécaniques."
+    },
+    {
+        id: 11,
+        name: "Capot de protection personnalisé",
+        category: "custom",
+        price: 3400,
+        image: "https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=800&q=80",
+        description: "Capot de protection en ABS, moulé selon vos dimensions."
+    },
+    {
+        id: 12,
+        name: "Rondelle plastique technique",
+        category: "custom",
+        price: 800,
+        image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3a8b?auto=format&fit=crop&w=800&q=80",
+        description: "Rondelle en plastique technique, idéale pour isolations et montages spéciaux."
     }
 ];
 
@@ -63,35 +130,212 @@ function showToast(message) {
     setTimeout(() => { toast.style.display = 'none'; }, 1300);
 }
 
-// Affiche les produits dans la grille
-function renderProducts(productsToRender) {
-    const productsList = document.getElementById('products-list');
-    if (!productsList) return;
-    productsList.innerHTML = '';
-    if (productsToRender.length === 0) {
-        productsList.innerHTML = '<div class="col-span-3 text-center text-gray-400">Aucun produit trouvé.</div>';
-        return;
+// --- Nouvelle UX page produits ---
+const categories = [
+    {
+        key: 'mounts',
+        name: 'Supports pour Caméra',
+        image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1630&q=80'
+    },
+    {
+        key: 'sealing',
+        name: "Joints d’étanchéité",
+        image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    },
+    {
+        key: 'custom',
+        name: 'Pièces sur mesure',
+        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
     }
-    productsToRender.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'bg-white rounded-lg shadow-md p-6 flex flex-col items-center';
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="h-40 w-40 object-cover rounded mb-4" loading="lazy">
-            <h3 class="text-lg font-bold mb-2">${product.name}</h3>
-            <p class="text-gray-500 mb-2">${product.description}</p>
-            <div class="font-bold text-blue-800 mb-4">${product.price} DA</div>
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded transition duration-300 add-to-cart-btn" data-id="${product.id}">Ajouter au panier</button>
+];
+
+function renderCategories() {
+    const catList = document.getElementById('categories-list');
+    if (!catList) return;
+    catList.innerHTML = '';
+    categories.forEach(cat => {
+        // Carte catégorie
+        const card = document.createElement('div');
+        card.className = 'relative group bg-white rounded-xl shadow-lg p-6 flex flex-col items-center justify-between cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl';
+        card.style.width = '320px';
+        // Contenu normal (catégorie)
+        const normalContent = document.createElement('div');
+        normalContent.className = 'category-normal flex flex-col items-center justify-center w-full';
+        normalContent.innerHTML = `
+            <img src="${cat.image}" alt="${cat.name}" class="h-40 w-40 object-cover rounded mb-4 transition-all duration-300 group-hover:scale-110">
+            <h3 class="text-xl font-bold mb-2 text-blue-800">${cat.name}</h3>
+            <div class="text-gray-500 text-center mb-2">Découvrez nos produits</div>
         `;
-        productsList.appendChild(productCard);
-    });
-    // Ajoute l'écouteur sur chaque bouton "Ajouter au panier"
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const id = parseInt(e.target.getAttribute('data-id'));
-            addToCart(id);
+        // Mini-carrousel (caché par défaut)
+        const carouselDiv = document.createElement('div');
+        carouselDiv.className = 'category-carousel flex flex-col items-center justify-center w-full hidden';
+        carouselDiv.style.minHeight = '220px';
+        carouselDiv.innerHTML = `
+            <div class="relative w-full flex flex-col items-center">
+                <div class="w-full flex justify-center">
+                    <img id="mini-carousel-img-${cat.key}" src="" alt="" class="h-40 w-40 object-cover rounded shadow-lg mb-2 transition-all duration-500">
+                </div>
+                <div id="mini-carousel-name-${cat.key}" class="text-base font-semibold text-blue-800 mb-1"></div>
+            </div>
+        `;
+        card.appendChild(normalContent);
+        card.appendChild(carouselDiv);
+        // Animation mini-carrousel au survol
+        let miniCarouselInterval = null;
+        card.addEventListener('mouseenter', () => {
+            normalContent.classList.add('hidden');
+            carouselDiv.classList.remove('hidden');
+            // Lance le mini-carrousel
+            const catProducts = products.filter(p => p.category === cat.key);
+            let idx = 0;
+            function showMiniSlide() {
+                const img = carouselDiv.querySelector(`#mini-carousel-img-${cat.key}`);
+                const name = carouselDiv.querySelector(`#mini-carousel-name-${cat.key}`);
+                if (catProducts.length > 0) {
+                    img.src = catProducts[idx].image;
+                    img.alt = catProducts[idx].name;
+                    name.textContent = catProducts[idx].name;
+                    idx = (idx + 1) % catProducts.length;
+                }
+            }
+            showMiniSlide();
+            miniCarouselInterval = setInterval(showMiniSlide, 1600);
         });
+        card.addEventListener('mouseleave', () => {
+            normalContent.classList.remove('hidden');
+            carouselDiv.classList.add('hidden');
+            // Stop le mini-carrousel
+            if (miniCarouselInterval) clearInterval(miniCarouselInterval);
+        });
+        // Clic = carrousel complet
+        card.addEventListener('click', () => {
+            document.getElementById('categories-list').classList.add('hidden');
+            showCategoryCarousel(cat.key);
+        });
+        catList.appendChild(card);
     });
 }
+
+function renderCategoryPreview(catKey) {
+    const previewDiv = document.getElementById(`preview-${catKey}`);
+    if (!previewDiv) return;
+    const catProducts = products.filter(p => p.category === catKey).slice(0, 3);
+    previewDiv.innerHTML = catProducts.map(p => `
+        <div class="flex flex-col items-center mx-2">
+            <img src="${p.image}" alt="${p.name}" class="h-16 w-16 object-cover rounded mb-1 border border-blue-100">
+            <span class="text-xs font-semibold text-blue-800">${p.name}</span>
+        </div>
+    `).join('');
+}
+
+function showCategoryCarousel(catKey) {
+    const container = document.getElementById('category-carousel-container');
+    if (!container) return;
+    container.classList.remove('hidden');
+    container.innerHTML = '';
+    // Bouton retour
+    const backBtn = document.createElement('button');
+    backBtn.className = 'mb-6 bg-gray-200 hover:bg-blue-600 hover:text-white text-blue-800 font-bold py-2 px-6 rounded transition duration-300';
+    backBtn.innerHTML = '<i class="fas fa-arrow-left mr-2"></i>Retour aux catégories';
+    backBtn.onclick = () => {
+        container.classList.add('hidden');
+        document.getElementById('categories-list').classList.remove('hidden');
+    };
+    container.appendChild(backBtn);
+    // Carrousel produits de la catégorie
+    const catProducts = products.filter(p => p.category === catKey);
+    if (catProducts.length === 0) {
+        container.innerHTML += '<div class="text-center text-gray-400">Aucun produit dans cette catégorie.</div>';
+        return;
+    }
+    let current = 0;
+    function getVisibleCount() {
+        if (window.innerWidth < 640) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+    }
+    function renderCarousel() {
+        // Animation slide-out si déjà un slide
+        const oldSlide = container.querySelector('.carousel-slide');
+        if (oldSlide) {
+            oldSlide.classList.add('transition-transform', 'duration-500', 'ease-in-out', 'translate-x-[-100%]', 'opacity-0');
+            setTimeout(() => {
+                oldSlide.remove();
+            }, 500);
+        }
+        const slide = document.createElement('div');
+        const visibleCount = getVisibleCount();
+        slide.className = `carousel-slide grid grid-cols-1 sm:grid-cols-${Math.min(visibleCount,catProducts.length)} md:grid-cols-${Math.min(visibleCount,catProducts.length)} gap-8 items-stretch justify-center p-4 md:p-8 transition-all duration-700 translate-x-[100%] opacity-0`;
+        for (let i = 0; i < visibleCount; i++) {
+            const idx = (current + i) % catProducts.length;
+            const prod = catProducts[idx];
+            const prodDiv = document.createElement('div');
+            prodDiv.className = 'flex flex-col items-center bg-white rounded-lg shadow-lg p-6 h-full';
+            prodDiv.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}" class="h-40 w-40 md:h-56 md:w-56 object-cover rounded-lg shadow mb-4 transition-all duration-500">
+                <h3 class="text-xl font-bold mb-2 text-blue-800 text-center">${prod.name}</h3>
+                <p class="text-gray-600 mb-2 text-center text-base">${prod.description}</p>
+                <div class="font-bold text-blue-800 text-lg mb-4">${prod.price} DA</div>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300 add-to-cart-btn" data-id="${prod.id}">Ajouter au panier</button>
+            `;
+            slide.appendChild(prodDiv);
+        }
+        container.appendChild(slide);
+        // Animation slide-in
+        setTimeout(() => {
+            slide.classList.remove('translate-x-[100%]', 'opacity-0');
+            slide.classList.add('translate-x-0', 'opacity-100');
+        }, 10);
+        // Flèches navigation
+        let nav = container.querySelector('.carousel-nav');
+        if (!nav && catProducts.length > visibleCount) {
+            nav = document.createElement('div');
+            nav.className = 'carousel-nav flex justify-center gap-8 mt-4';
+            nav.innerHTML = `
+                <button id="carousel-prev" class="bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition"><i class="fas fa-chevron-left"></i></button>
+                <button id="carousel-next" class="bg-white hover:bg-blue-600 hover:text-white text-blue-800 font-bold rounded-full p-3 shadow-lg transition"><i class="fas fa-chevron-right"></i></button>
+            `;
+            container.appendChild(nav);
+            nav.querySelector('#carousel-prev').addEventListener('click', () => {
+                current = (current - visibleCount + catProducts.length) % catProducts.length;
+                renderCarousel();
+            });
+            nav.querySelector('#carousel-next').addEventListener('click', () => {
+                current = (current + visibleCount) % catProducts.length;
+                renderCarousel();
+            });
+        }
+        // Ajout au panier
+        slide.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.target.getAttribute('data-id'));
+                addToCart(id);
+            });
+        });
+    }
+    renderCarousel();
+    window.addEventListener('resize', renderCarousel);
+}
+
+// Initialisation page produits
+window.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    renderCategories();
+    updateCartCount();
+    // Recherche
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.trim().toLowerCase();
+            // Filtre les catégories selon le nom
+            document.querySelectorAll('#categories-list > div').forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                card.style.display = name.includes(term) ? '' : 'none';
+            });
+        });
+    }
+});
+
 
 // Filtre les produits selon la catégorie
 function filterProducts(category) {
